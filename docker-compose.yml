@@ -3,7 +3,7 @@ services:
   budget_app:
     image: node:8-alpine
     working_dir: /app
-    container_name: ncds
+    container_name: budget_app
     command: sh -c "yarn && yarn start"
     volumes:
       - ./budget_app:/app
@@ -11,7 +11,7 @@ services:
   budget_api:
     image: node:8-alpine
     working_dir: /app
-    container_name: ncds
+    container_name: budget_api
     command: sh -c "yarn && yarn start"
     volumes:
       - ./budget_api:/app
