@@ -5,6 +5,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import { logout } from '../../actions/auth';
 import Notification from './Notification';
+import Loading from './Loading';
 
 
 const styles = theme => ({
@@ -39,12 +40,13 @@ export default function (ComposedComponent) {
 
       return (
         <div className={classes.root}>
-        <Header logout={this.props.logout} loading={this.props.loading}/>
-        <Sidebar activePage={this.props.match.path} gotoLink={(link)=>this.props.history.push(link)} loading={this.props.loading}/>
-        <main className={classes.content}>
-            <div className={classes.toolbar} />
-            <ComposedComponent {...this.props} />
-        </main>
+          <Header logout={this.props.logout} loading={this.props.loading}/>
+          <Sidebar activePage={this.props.match.path} gotoLink={(link)=>this.props.history.push(link)} loading={this.props.loading}/>
+          <main className={classes.content}>
+              <div className={classes.toolbar} />
+              <ComposedComponent {...this.props} />
+          </main>
+          {this.props.loading && <Loading />}
           <Notification />
         </div>
       )

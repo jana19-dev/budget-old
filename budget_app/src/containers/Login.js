@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import { login } from '../actions/auth';
 import Logo from '../assets/logo.svg';
 import Notification from '../components/common/Notification';
+import Loading from '../components/common/Loading';
+
 import Typography from '@material-ui/core/Typography';
 
 
@@ -56,6 +58,7 @@ class Login extends Component {
   render() {  
     return (
       <Wrapper>
+        {this.props.loading && <Loading />}
         <Notification />
         <form onSubmit={this.login} style={{padding: 10}}>
           <Typography variant='headline'>Budget</Typography>
@@ -92,7 +95,8 @@ class Login extends Component {
 
 
 const mapStateToProps = state => ({
-  token: state.auth.token
+  token: state.auth.token,
+  loading: state.general.loading
 })
 
 const mapDispatchToProps = dispatch => ({
