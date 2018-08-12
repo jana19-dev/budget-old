@@ -2,12 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
 import styled from 'styled-components';
 import { login } from '../actions/auth';
 import Logo from '../assets/logo.svg';
 import Notification from '../components/common/Notification';
 import Typography from '@material-ui/core/Typography';
+
+
+const Wrapper = styled.div`
+  max-width: 400px;
+  max-height: 600px;
+  background: transparent !important;
+  margin: 50px auto;
+  text-align: center;
+`
+
+const TextInput = styled(TextField)`
+  margin: 10px 0 !important;
+`
+
+const LoginButton = styled(Button)`
+  margin: 10px 0 !important;
+  max-width: 70%;
+`
 
 class Login extends Component {
   constructor(props) {
@@ -36,26 +53,9 @@ class Login extends Component {
     this.props.login({email, password})
   }
 
-  render() {
-    const Wrapper = styled(Paper)`
-      max-width: 400px;
-      max-height: 600px;
-      background: transparent !important;
-      margin: 50px auto;
-      text-align: center;
-    `
-
-    const TextInput = styled(TextField)`
-      margin: 10px 0 !important;
-    `
-
-    const LoginButton = styled(Button)`
-      margin: 10px 0 !important;
-      max-width: 70%;
-    `
-
+  render() {  
     return (
-      <Wrapper elevation={15}>
+      <Wrapper>
         <Notification />
         <form onSubmit={this.login} style={{padding: 10}}>
           <Typography variant='headline'>Budget</Typography>
