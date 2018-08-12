@@ -1,8 +1,7 @@
 const initialState = {
     _id: "",
     email: "",
-    token: "",
-    loginError: ""
+    token: ""
   };
   
   const auth = (state = initialState, action) => {
@@ -10,7 +9,6 @@ const initialState = {
       case 'LOGIN_SUCCESS':
         return {
           ...state,
-          loginError: "",
           _id: action.payload.data.user._id,
           email: action.payload.data.user.email,
           token: action.payload.data.token,
@@ -18,7 +16,6 @@ const initialState = {
       case 'LOGIN_FAILED':
         return {
           ...state,
-          loginError: "Invalid Email or Password. Please try again."
         }
       case 'LOGOUT':
         return {

@@ -99,14 +99,14 @@ class CustomizedSnackbars extends React.Component {
           vertical: 'top',
           horizontal: 'right',
         }}
-        open={this.props.notification && this.props.notification!==''}
-        autoHideDuration={this.props.notificationType==='error' ? null : 6000}
+        open={this.props.notificationShow}
+        autoHideDuration={this.props.notificationType==='error' ? null : 3000}
         onClose={this.handleClose}
       >
         <MySnackbarContentWrapper
           onClose={this.handleClose}
           variant={this.props.notificationType}
-          message={this.props.notification}
+          message={this.props.notificationMessage}
         />
       </Snackbar>
     );
@@ -115,7 +115,8 @@ class CustomizedSnackbars extends React.Component {
 
 
 const mapStateToProps = state => ({
-  notification: state.general.notification,
+  notificationShow: state.general.notificationShow,
+  notificationMessage: state.general.notificationMessage,
   notificationType: state.general.notificationType,
 })
 

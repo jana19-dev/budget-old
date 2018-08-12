@@ -1,7 +1,8 @@
 const initialState = {
     loading: false,
-    notification: false,
-    notificationType: 'success'
+    notificationShow: false,
+    notificationType: 'info',
+    notificationMessage: ''
   };
   
   const general = (state = initialState, action) => {
@@ -14,22 +15,23 @@ const initialState = {
       case 'CLEAR_NOTIFICATION':
         return {
           ...state,
-          notification: false,
-          notificationType: 'success'
+          notificationShow: false,
         }
       case (action.type.match(/_SUCCESS$/) || {}).input:
         return {
           ...state,
           loading: false,
-          notification: action.meta.previousAction.success,
+          notificationShow: true,
+          notificationMessage: action.meta.previousAction.success,
           notificationType: 'success'
         }
       case (action.type.match(/_FAILED$/) || {}).input:
-        console.log(action.error.response);
+        console.log(action.error);
         return {
           ...state,
           loading: false,
-          notification: "Oops. Something went wrong! Error logged to console.",
+          notificationShow: true,
+          notificationMessage: action.meta.previousAction.failure,
           notificationType: 'error'
         }
       default:

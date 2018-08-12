@@ -6,7 +6,9 @@ export const login = ({email, password}) => ({
         method: 'POST',
         data: {email, password}
       }
-    }
+    },
+    success: "Welcome Back",
+    failure: "Invalid email/password. Please try again."
   })
   
   export const logout = () => ({

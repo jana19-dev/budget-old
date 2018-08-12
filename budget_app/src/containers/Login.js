@@ -92,7 +92,6 @@ class Login extends Component {
 
 
 const mapStateToProps = state => ({
-  loginError: state.auth.loginError,
   token: state.auth.token
 })
 
