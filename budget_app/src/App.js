@@ -31,8 +31,12 @@ class App extends Component {
 
 const theme = createMuiTheme({
   palette: {
+    type: 'dark',
+    primary: {
+      main: '#009688',
+    },
     secondary: {
-      main: '#ff0000',
+      main: '#26a69a',
     },
   },
 });

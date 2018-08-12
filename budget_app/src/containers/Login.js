@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import Paper from '@material-ui/core/Paper';
+import styled from 'styled-components';
 import { login } from '../actions/auth';
-
-const styles = theme => ({
-  root: {
-    // padding: theme.spacing.unit,
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
-  },
-  button: {
-    margin: theme.spacing.unit,
-  },
-});
+import Logo from '../assets/logo.svg';
+import Notification from '../components/common/Notification';
+import Typography from '@material-ui/core/Typography';
 
 class Login extends Component {
   constructor(props) {
@@ -48,14 +37,32 @@ class Login extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const Wrapper = styled(Paper)`
+      max-width: 400px;
+      max-height: 600px;
+      background: transparent !important;
+      margin: 50px auto;
+      text-align: center;
+    `
+
+    const TextInput = styled(TextField)`
+      margin: 10px 0 !important;
+    `
+
+    const LoginButton = styled(Button)`
+      margin: 10px 0 !important;
+      max-width: 70%;
+    `
+
     return (
-      <div className={classes.root}>
-        <form onSubmit={this.login}>
-          <TextField
+      <Wrapper elevation={15}>
+        <Notification />
+        <form onSubmit={this.login} style={{padding: 10}}>
+          <Typography variant='headline'>Budget</Typography>
+          <img src={Logo} alt="Logo" style={{maxWidth:250}}/>
+          <TextInput
             name="email"
             label="Email"
-            className={classes.textField}
             type="email"
             autoComplete="email"
             fullWidth
@@ -64,10 +71,9 @@ class Login extends Component {
             value={this.state.email}
             required
           />
-          <TextField
+          <TextInput
             name="password"
             label="Password"
-            className={classes.textField}
             type="password"
             autoComplete="password"
             fullWidth
@@ -75,12 +81,11 @@ class Login extends Component {
             value={this.state.password}
             required
           />
-          {this.props.loginError ? <p>{this.props.loginError}</p> : null}
-          <Button type="submit" variant="contained" color="primary" className={classes.button}>
+          <LoginButton type="submit" variant="contained" color="primary" fullWidth>
             Login
-          </Button>
+          </LoginButton>
         </form>
-      </div>
+      </Wrapper>
     )
   }
 }
@@ -95,7 +100,4 @@ const mapDispatchToProps = dispatch => ({
   login: credentials => dispatch(login(credentials))
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(Login))
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

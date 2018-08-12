@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
@@ -27,6 +26,7 @@ const styles1 = theme => ({
   },
   error: {
     backgroundColor: theme.palette.error.dark,
+    color: '#fff',
   },
   info: {
     backgroundColor: theme.palette.primary.dark,
@@ -100,7 +100,7 @@ class CustomizedSnackbars extends React.Component {
           horizontal: 'right',
         }}
         open={this.props.notification && this.props.notification!==''}
-        autoHideDuration={6000}
+        autoHideDuration={this.props.notificationType==='error' ? null : 6000}
         onClose={this.handleClose}
       >
         <MySnackbarContentWrapper
