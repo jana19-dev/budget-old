@@ -1,21 +1,55 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom'
+import wrapperPage from './components/common/Wrapper';
+import FourOhFour from './components/common/FourOhFour';
+import Login from './containers/Login';
+import Home from './containers/Home';
+
 
 class App extends Component {
+
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      <Router>
+        <Switch>
+          <Route exact path="/" component={wrapperPage(Home)} />
+          <Route exact path="/login" component={Login} />
+          <Route component={FourOhFour} />
+        </Switch>
+      </Router>
+
+    )
   }
 }
 
-export default App;
+const theme = createMuiTheme({
+  palette: {
+    secondary: {
+      main: '#ff0000',
+    },
+  },
+});
+
+function withRoot(Component) {
+  function WithRoot(props) {
+    return (
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...props} />
+      </MuiThemeProvider>
+    );
+  }
+  return WithRoot;
+}
+
+
+
+
+export default withRoot(App);
