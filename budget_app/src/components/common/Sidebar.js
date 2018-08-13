@@ -3,31 +3,39 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Icon from '@material-ui/core/Icon';
-import Typography from '@material-ui/core/Typography';
-
+import Collapse from '@material-ui/core/Collapse';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
 const styles = theme => ({
   drawerPaper: {
     position: 'relative',
     width: 240,
+    backgroundColor: 'transparent',
+    border: 'none'
   },
-  toolbar: {...theme.mixins.toolbar, minHeight: '57px !important'}
+  toolbar: {...theme.mixins.toolbar, minHeight: '57px !important'},
+  nested: {
+    paddingLeft: theme.spacing.unit * 4,
+  },
+  secondary: {
+    textAlign: 'right',
+    fontSize: 13
+  }
 });
 
-const menus = [
-  {label: 'Contributions', link: '/admin/contributions', icon: 'people'},
-  {label: 'Publications', link: '/admin/publications', icon: 'book'},
-  {label: 'News', link: '/admin/news', icon: 'library_books'},
-  {label: 'Galleries', link: '/admin/galleries', icon: 'camera_alt'},
-  {label: 'Events', link: '/admin/events', icon: 'event'},
-  {label: 'Obituaries', link: '/admin/obituaries', icon: 'remove_red_eye'},
-  {label: 'Messages', link: '/admin/messages', icon: 'contact_mail'}
-];
-
 class Sidebar extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: true,
+    }
+  }
+
+  handleClick = () => {
+    this.setState(state => ({ open: !state.open }));
+  };
 
   render() {
     const { classes } = this.props;
@@ -41,28 +49,23 @@ class Sidebar extends Component {
       >
         <div className={classes.toolbar} />
         <List>
-          {menus.map(({ label, link, icon }, idx)=>
-            <ListItem
-              key={idx}
-              button
-              onClick={()=>this.props.activePage===link || this.props.loading ? null : this.props.gotoLink(link)}
-              divider
-              style={{backgroundColor: this.props.activePage===link ? '#1976d2' : ''}}
-            >
-              <ListItemIcon>
-                <Icon>{icon}</Icon>
-              </ListItemIcon>
-              <ListItemText
-                disableTypography
-                primary={
-                  <Typography
-                    variant="body2"
-                    style={{ color: this.props.activePage===link ? '#FFFFFF' : 'inherit' }}
-                  >
-                    {label}
-                  </Typography>}/>
-            </ListItem>
-          )}
+          <ListItem button onClick={this.handleClick} dense>
+            <ListItemText primary="Chequing" secondary='4,521.56'/>
+            {this.state.open ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItem button className={classes.nested} divider dense >
+                <ListItemText primary="Starred" secondary='4,521.56' secondaryTypographyProps={{className: classes.secondary}}/>
+              </ListItem>
+              <ListItem button className={classes.nested} divider dense >
+                <ListItemText primary="Starred" secondary='421.56' secondaryTypographyProps={{className: classes.secondary}}/>
+              </ListItem>
+              <ListItem button className={classes.nested} divider dense >
+                <ListItemText primary="Starred" secondary='4,521.56' secondaryTypographyProps={{className: classes.secondary}}/>
+              </ListItem>
+            </List>
+          </Collapse>
         </List>
       </Drawer>
     )

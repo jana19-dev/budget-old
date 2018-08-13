@@ -23,6 +23,7 @@ const variantIcon = {
 const styles1 = theme => ({
   success: {
     backgroundColor: green[600],
+    color: '#fff',
   },
   error: {
     backgroundColor: theme.palette.error.dark,
@@ -30,9 +31,11 @@ const styles1 = theme => ({
   },
   info: {
     backgroundColor: theme.palette.primary.dark,
+    color: '#fff',
   },
   warning: {
     backgroundColor: amber[700],
+    color: '#fff',
   },
   icon: {
     fontSize: 20,
