@@ -51,7 +51,7 @@ class Sidebar extends Component {
         <List>
           <ListItem button onClick={this.handleClick} dense>
             <ListItemText primary="Chequing" secondary='4,521.56'/>
-            {this.state.open ? <ExpandLess /> : <ExpandMore />}
+            {this.state.open ? <ExpandLess style={{color:"#fff"}} /> : <ExpandMore style={{color:"#fff"}}/>}
           </ListItem>
           <Collapse in={this.state.open} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>

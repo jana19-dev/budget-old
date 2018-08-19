@@ -47,6 +47,7 @@ class Header extends Component {
               onChange={this.handleTextChange}
               value={this.state.search}
               type="search"
+              style={{paddingTop: 15}}
             />
           </Typography>
           <Button variant="fab" mini onClick={this.props.logout} disabled={this.props.loading} color="secondary"><LogoutIcon/></Button>
