@@ -11,15 +11,15 @@ const transactionSchema = new Schema({
     required: true,
     default: Date.now
   },
-  payee: {
+  payeeID: {
     type: Schema.Types.ObjectId, 
     ref: 'Payee'
   },
-  account: {
+  accountID: {
     type: Schema.Types.ObjectId, 
     ref: 'Account'
   },
-  category: {
+  categoryID: {
     type: Schema.Types.ObjectId, 
     ref: 'Category'
   },

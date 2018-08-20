@@ -1,13 +1,17 @@
-import { regsiter, login, remove } from '../controllers/userController';
-import PromiseRouter from 'express-promise-router';
-import passport from '../config/passport';
-import { validateParam, validateBody } from '../validations';
-import { schemas } from '../validations/userValidation';
+import { 
+  regsiter, 
+  login, 
+  remove 
+} from '../controllers/userController'
+import PromiseRouter from 'express-promise-router'
+import passport from '../config/passport'
+import { validateBody } from '../validations'
+import { schemas } from '../validations/userValidation'
 
 
-const router = PromiseRouter();
-const passportSignIn = passport.authenticate('local', { session: false });
-const passportJWT = passport.authenticate('jwt', { session: false });
+const router = PromiseRouter()
+const passportSignIn = passport.authenticate('local', { session: false })
+const passportJWT = passport.authenticate('jwt', { session: false })
 
 router.route('/register')
   .post(
@@ -29,4 +33,4 @@ router.route('/delete')
   )
 
 
-export default router;
+export default router

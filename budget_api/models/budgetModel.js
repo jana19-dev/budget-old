@@ -15,13 +15,13 @@ const budgetSchema = new Schema({
     required: true,
     default: Date.now
   },
-  payess: [
+  payeeIDs: [
     { type: Schema.Types.ObjectId, ref: 'Payee' }
   ],
-  acounts: [
+  acountIDs: [
     { type: Schema.Types.ObjectId, ref: 'Account' }
   ],
-  groups: [
+  groupIDs: [
     { type: Schema.Types.ObjectId, ref: 'Group' }
   ]
 }, options)

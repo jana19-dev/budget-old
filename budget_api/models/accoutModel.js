@@ -35,7 +35,7 @@ const accountSchema = new Schema({
     type: Map,
     default: {}
   },
-  transactions: [
+  transactionIDs: [
     { type: Schema.Types.ObjectId, ref: 'Transaction' }
   ]
 }, options)

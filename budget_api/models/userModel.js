@@ -12,7 +12,10 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  budgetIDs: [
+    { type: Schema.Types.ObjectId, ref: 'Budget' }
+  ]
 })
 
 userSchema.pre('save', async function (next) {

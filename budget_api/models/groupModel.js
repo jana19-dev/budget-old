@@ -10,7 +10,7 @@ const groupSchema = new Schema({
     type: String,
     required: true
   },
-  Categories: [
+  CategoryIDs: [
     { type: Schema.Types.ObjectId, ref: 'Category' }
   ],
   visible: {
