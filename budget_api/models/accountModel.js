@@ -15,7 +15,7 @@ const accountSchema = new Schema({
   },
   type: {
     type: String,
-    default: "other" // Choice of ["checking", "savings", "credit", "loan", "mortgage", "investment", "other"]
+    default: "other" // Choice of ["checking", "savings", "credit", "loan", "mortgage", "investment", "cash", "other"]
   },
   startDate: {
     type: Date,
@@ -35,8 +35,12 @@ const accountSchema = new Schema({
     type: Map,
     default: {}
   },
+  budgetID: {
+    type: String,
+    required: true
+  },
   transactionIDs: [
-    { type: Schema.Types.ObjectId, ref: 'Transaction' }
+    { type: String, ref: 'Transaction' }
   ]
 }, options)
 

@@ -18,7 +18,7 @@ const userSchema = new Schema({
   ]
 })
 
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async (next) => {
   try {
     const salt = await bcrypt.genSalt(10)
     this.password = await bcrypt.hash(this.password, salt)
@@ -28,7 +28,7 @@ userSchema.pre('save', async function (next) {
   }
 })
 
-userSchema.methods.isValidPassword = async function (loginPassword) {
+userSchema.methods.isValidPassword = async (loginPassword) => {
   try {
     return await bcrypt.compare(loginPassword, this.password)
   } catch (error) {

@@ -12,15 +12,15 @@ const transactionSchema = new Schema({
     default: Date.now
   },
   payeeID: {
-    type: Schema.Types.ObjectId, 
+    type: String, 
     ref: 'Payee'
   },
   accountID: {
-    type: Schema.Types.ObjectId, 
+    type: String, 
     ref: 'Account'
   },
   categoryID: {
-    type: Schema.Types.ObjectId, 
+    type: String, 
     ref: 'Category'
   },
   recurring: {
@@ -44,6 +44,10 @@ const transactionSchema = new Schema({
     default: ""
   },
   memo: {
+    type: String,
+    default: ""
+  },
+  attachment: {
     type: String,
     default: ""
   },

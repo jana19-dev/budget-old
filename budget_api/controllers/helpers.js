@@ -1,4 +1,4 @@
-export function findByIdCallback (res, error, object, id, name) {
+export function findByIdCallback (res, error, object, id=null, name='Resource') {
   if (error)
     return res.status(404).json({ error: error.message });
   else if (!object)

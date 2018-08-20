@@ -5,6 +5,7 @@ import bodyParser from 'body-parser'
 import helmet from 'helmet'
 import userRoutes from './routes/userRoutes'
 import budgetRoutes from './routes/budgetRoutes'
+import accountRoutes from './routes/accountRoutes'
 
 
 const app = express()
@@ -29,6 +30,8 @@ app.use(bodyParser.json({limit: '1000mb'}))
 // Routes
 app.use('/auth', userRoutes)
 app.use('/budgets', budgetRoutes)
+app.use('/accounts', accountRoutes)
+
 
 // Catch 404 Errors
 app.use((req, res, next) => {

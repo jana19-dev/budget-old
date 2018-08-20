@@ -7,16 +7,10 @@ export const schemas = {
   }),
   budgetCreateSchema: Joi.object().keys({
     name: Joi.string().required(),
-    startDate: Joi.date().iso().required(),
-    payees: Joi.array().items(Joi.string()),
-    acounts: Joi.array().items(Joi.string()),
-    groups: Joi.array().items(Joi.string()),
+    startDate: Joi.date().iso().required()
   }),
   budgetUpdateSchema: Joi.object().keys({
-    name: Joi.string(),
-    startDate: Joi.date().iso(),
-    payees: Joi.array().items(Joi.string()),
-    acounts: Joi.array().items(Joi.string()),
-    groups: Joi.array().items(Joi.string()),
+    name: Joi.string().required(),
+    startDate: Joi.date().iso().required()
   }),
 }

@@ -11,7 +11,7 @@ const groupSchema = new Schema({
     required: true
   },
   CategoryIDs: [
-    { type: Schema.Types.ObjectId, ref: 'Category' }
+    { type: String, ref: 'Category' }
   ],
   visible: {
     type: Boolean,

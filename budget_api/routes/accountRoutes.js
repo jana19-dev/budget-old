@@ -4,11 +4,11 @@ import {
   create, 
   update, 
   remove 
-} from '../controllers/budgetController'
+} from '../controllers/accountController'
 import PromiseRouter from 'express-promise-router'
 import passport from '../config/passport'
 import { validateParam, validateBody } from '../validations'
-import { schemas } from '../validations/budgetValidation'
+import { schemas } from '../validations/accountValidation'
 
 
 const router = PromiseRouter();
@@ -27,14 +27,14 @@ router.route('/:id')
 
 router.route('/')
   .post(
-    validateBody(schemas.budgetCreateSchema),
+    validateBody(schemas.accountCreateSchema),
     passportJWT,
     create
   )
 
 router.route('/:id')
   .put(
-    validateBody(schemas.budgetUpdateSchema),
+    validateBody(schemas.accountUpdateSchema),
     passportJWT,
     update
   )
