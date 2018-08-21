@@ -33,7 +33,7 @@ const accountSchema = new Schema({
     default: true
   },
   plaidAccount: {
-    type: Map,
+    type: mixed,
     default: {}
   },
   budgetID: {

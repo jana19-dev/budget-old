@@ -24,7 +24,7 @@ const transactionSchema = new Schema({
     required: true
   },
   recurring: {
-    type: Map,
+    type: mixed,
     default: {frequency: "once", untilDate: null, noOfPayments: 1}
   },
   inflow: {
@@ -52,7 +52,7 @@ const transactionSchema = new Schema({
     default: ""
   },
   plaidTransaction: {
-    type: Map,
+    type: mixed,
     default: {}
   }
 }, options)

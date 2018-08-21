@@ -19,7 +19,7 @@ const payeeSchema = new Schema({
     default: "outflow"
   },
   googlePlace: {
-    type: Map,
+    type: mixed,
     default: {}
   }
 }, options)
