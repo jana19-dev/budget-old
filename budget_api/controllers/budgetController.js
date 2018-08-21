@@ -17,7 +17,7 @@ export async function create(req, res, next) {
   const duplicateName = await Budget.findOne({ name })
   if (duplicateName)
     return res.status(403).json({ error: `Budget already exists with name: ${name}` })
-  const budget = await new Budget(req.value.body).save()
+  const budget = await Budget.create(req.value.body)
   res.status(201).json({ ...budget['_doc'] })
 }
 
@@ -29,5 +29,5 @@ export async function update(req, res, next) {
 
 export async function remove(req, res, next) {
   const { id } = req.params
-  return Budget.findByIdAndRemove(id, (error, object)=>findByIdCallback(res, error, object, id, 'Budget'))
+  return Budget.findOneAndRemove({_id: id}, (error, object)=>findByIdCallback(res, error, object, id, 'Budget'))
 }

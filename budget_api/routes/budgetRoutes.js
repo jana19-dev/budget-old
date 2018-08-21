@@ -33,7 +33,7 @@ router.route('/')
   )
 
 router.route('/:id')
-  .put(
+  .patch(
     validateBody(schemas.budgetUpdateSchema),
     passportJWT,
     update

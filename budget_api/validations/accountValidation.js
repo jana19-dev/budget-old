@@ -16,11 +16,11 @@ export const schemas = {
     budgetID: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
   }),
   accountUpdateSchema: Joi.object().keys({
-    name: Joi.string().required(),
+    name: Joi.string(),
     description: Joi.string(),
     type: Joi.string().valid(["checking", "savings", "credit", "loan", "mortgage", "investment", "cash", "other"]),
-    startDate: Joi.date().iso().required(),
-    startBalance: Joi.number().precision(2).required(),
+    startDate: Joi.date().iso(),
+    startBalance: Joi.number().precision(2),
     budgeted: Joi.boolean(),
     plaidAccount: Joi.object()
   }),

@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
+import Budget from './budgetModel'
 
 
 const options = {
@@ -40,9 +41,17 @@ const accountSchema = new Schema({
     required: true
   },
   transactionIDs: [
-    { type: String, ref: 'Transaction' }
+    { type: String }
   ]
 }, options)
+
+
+accountSchema.post('findOneAndRemove', async account => { 
+  if (account) {
+    const budget = await Budget.findById(account.budgetID)
+    await budget.update({accountIDs: budget.accountIDs.filter(accountID=>accountID!==account.id)})
+  } 
+});
 
 
 export default mongoose.model('account', accountSchema)

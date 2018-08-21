@@ -12,16 +12,16 @@ const transactionSchema = new Schema({
     default: Date.now
   },
   payeeID: {
-    type: String, 
-    ref: 'Payee'
+    type: String,
+    required: true
   },
   accountID: {
-    type: String, 
-    ref: 'Account'
+    type: String,
+    required: true
   },
   categoryID: {
-    type: String, 
-    ref: 'Category'
+    type: String,
+    required: true
   },
   recurring: {
     type: Map,
