@@ -1,5 +1,5 @@
-import Budget from '../models/budgetModel'
 import { findByIdCallback } from './helpers'
+import Budget from '../models/budgetModel'
 
 
 export async function list(req, res, next) {
@@ -8,26 +8,26 @@ export async function list(req, res, next) {
 }
 
 export async function retrieve(req, res, next) {
-  const { id } = req.params
-  return Budget.findById(id, (error, object)=>findByIdCallback(res, error, object, id, 'Budget'))
+  return res.status(200).json(req.value.body.budget);
 }
 
 export async function create(req, res, next) {
-  const { name } = req.value.body
+  const { user } = req
+  const { name, startDate } = req.value.body
   const duplicateName = await Budget.findOne({ name })
   if (duplicateName)
     return res.status(403).json({ error: `Budget already exists with name: ${name}` })
-  const budget = await Budget.create(req.value.body)
+  const budget = await Budget.create({name, startDate, userID: user.id})
   res.status(201).json({ ...budget['_doc'] })
 }
 
 export async function update(req, res, next) {
-  const { id } = req.params
-  let updatedBudget = req.value.body
-  return Budget.findByIdAndUpdate(id, updatedBudget, (error, object)=>findByIdCallback(res, error, object, id, 'Budget'))
+  const { budget, updatedBudget } = req.value.body
+  await budget.update({...updatedBudget})
+  return res.status(200).json({...budget._doc, ...updatedBudget});
 }
 
 export async function remove(req, res, next) {
-  const { id } = req.params
-  return Budget.findOneAndRemove({_id: id}, (error, object)=>findByIdCallback(res, error, object, id, 'Budget'))
+  await req.value.body.budget.remove()
+  return res.status(204).json();
 }

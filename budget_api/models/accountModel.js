@@ -33,8 +33,7 @@ const accountSchema = new Schema({
     default: true
   },
   plaidAccount: {
-    type: mixed,
-    default: {}
+    type: Object
   },
   budgetID: {
     type: String,

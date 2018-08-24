@@ -8,7 +8,7 @@ import {
 import PromiseRouter from 'express-promise-router'
 import passport from '../config/passport'
 import { validateParam, validateBody } from '../validations'
-import { schemas } from '../validations/budgetValidation'
+import { schemas, validateID } from '../validations/budgetValidation'
 
 
 const router = PromiseRouter();
@@ -22,6 +22,7 @@ router.route('/')
 router.route('/:id')
 .get(
   validateParam(schemas.idSchema, 'id'),
+  validateID(),
   retrieve
 )
 
@@ -36,6 +37,7 @@ router.route('/:id')
   .patch(
     validateBody(schemas.budgetUpdateSchema),
     passportJWT,
+    validateID(),
     update
   )
 
@@ -43,6 +45,7 @@ router.route('/:id')
   .delete(
     validateParam(schemas.idSchema, 'id'),
     passportJWT,
+    validateID(),
     remove
   )
 

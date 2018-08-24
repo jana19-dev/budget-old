@@ -14,7 +14,7 @@ const userSchema = new Schema({
     required: true
   },
   budgetIDs: [
-    { type: Schema.Types.ObjectId, ref: 'Budget' }
+    { type: String }
   ]
 })
 

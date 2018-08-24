@@ -11,8 +11,7 @@ const categorySchema = new Schema({
     required: true
   },
   budget: {
-    type: [mixed],  // {date: 2018-05-01, amount: 1264.45}
-    defautl: []
+    type: Object  // {date: 2018-05-01, amount: 1264.45}
   },
   visible: {
     type: Boolean,

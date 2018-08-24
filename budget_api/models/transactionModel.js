@@ -52,8 +52,7 @@ const transactionSchema = new Schema({
     default: ""
   },
   plaidTransaction: {
-    type: mixed,
-    default: {}
+    ype: Object
   }
 }, options)
 

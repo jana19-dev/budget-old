@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
+import User from '../models/userModel'
 import Account from './accountModel'
 import Group from './groupModel'
 import Payee from './payeeModel'
@@ -27,16 +28,26 @@ const budgetSchema = new Schema({
     { type: String }
   ],
   userID: {
-    type: String
+    type: String,
+    required: true
   }
 }, options)
 
 
-budgetSchema.post('findOneAndRemove', async budget => {
+budgetSchema.post('save', async budget => {
   if (budget) {
-    await Account.remove({budgetID: budget._id})
-    await Group.remove({budgetID: budget._id})
-    await Payee.remove({budgetID: budget._id})
+    const user = await User.findById(budget.userID)
+    await user.update({budgetIDs: [...user.budgetIDs, budget.id]})
+  } 
+});
+
+budgetSchema.post('remove', async budget => {
+  if (budget) {
+    await Account.remove({budgetID: budget.id})
+    await Group.remove({budgetID: budget.id})
+    await Payee.remove({budgetID: budget.id})
+    const user = await User.findById(budget.userID)
+    await user.update({budgetIDs: user.budgetIDs.filter(budgetID=>budgetID!==budget.id)})
   } 
 });
 
