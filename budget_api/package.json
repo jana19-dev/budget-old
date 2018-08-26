@@ -3,13 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "env $(cat .env) nodemon --exec babel-node server.js",
-    "build": "babel server --out-dir dist"
+    "start": "env $(cat .env) nodemon --exec babel-node server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "express": "^4.16.2",
-    "helmet": "^3.12.1",
     "joi": "^13.4.0",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.1.6",

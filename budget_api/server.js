@@ -1,7 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
 import mongoose from 'mongoose'
-import helmet from 'helmet'
+import passport from './config/passport'
 import userRoutes from './routes/userRoutes'
 import budgetRoutes from './routes/budgetRoutes'
 import accountRoutes from './routes/accountRoutes'
@@ -22,10 +22,14 @@ app.use((req, res, next) => {
   next()
 })
 
-// Middlewares
-app.use(helmet())
+// Log all requests
 app.use(morgan('dev'))
-app.use(express.json({limit: '1000mb'}))
+
+// Parse incoming requests with JSON payloads
+app.use(express.json({limit: '10mb'}))
+
+// Authenticate all routes except /auth
+app.use('^(?!/auth)', passport.authenticate('jwt', { session: false }))
 
 // Routes
 app.use('/auth', userRoutes)
