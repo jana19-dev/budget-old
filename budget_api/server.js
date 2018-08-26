@@ -12,7 +12,7 @@ const app = express()
 
 // MongoDB
 mongoose.connect(process.env.MONGO_DB, { useNewUrlParser: true })
-mongoose.Promise = global.Promise
+mongoose.set('debug', true);
 
 // Enable CORS
 app.use(function(req, res, next) {
@@ -20,7 +20,7 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
   next()
-});
+})
 
 // Middlewares
 app.use(helmet())
@@ -32,23 +32,18 @@ app.use('/auth', userRoutes)
 app.use('/budgets', budgetRoutes)
 app.use('/accounts', accountRoutes)
 
-
 // Catch 404 Errors
 app.use((req, res, next) => {
-  const err = new Error('Not found')
+  const err = new Error('Route not found')
   err.status = 404
   next(err)
-});
+})
 
 // Error handler function
 app.use((err, req, res, next) => {
   const status = err.status || 500
-  res.status(status).json({
-    error: {
-      message: err.message
-    }
-  });
-});
+  res.status(status).json({error: err.message})
+})
 
 // Start the server
 const port = process.env.PORT

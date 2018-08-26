@@ -36,18 +36,16 @@ const budgetSchema = new Schema({
 
 budgetSchema.post('save', async budget => {
   if (budget) {
-    const user = await User.findById(budget.userID)
-    await user.update({budgetIDs: [...user.budgetIDs, budget.id]})
+    await User.findByIdAndUpdate(budget.userID, { $push: { budgetIDs: budget.id } })
   } 
 });
 
-budgetSchema.post('remove', async budget => {
+budgetSchema.post('findOneAndRemove', async budget => {
   if (budget) {
     await Account.remove({budgetID: budget.id})
     await Group.remove({budgetID: budget.id})
     await Payee.remove({budgetID: budget.id})
-    const user = await User.findById(budget.userID)
-    await user.update({budgetIDs: user.budgetIDs.filter(budgetID=>budgetID!==budget.id)})
+    await User.findByIdAndUpdate(budget.userID, { $pull: { budgetIDs: budget.id } })
   } 
 });
 

@@ -1,7 +1,7 @@
-import passport from 'passport';
-import JwtStrategy, { ExtractJwt } from 'passport-jwt';
-import LocalStrategy from 'passport-local';
-import User from '../models/userModel';
+import passport from 'passport'
+import JwtStrategy, { ExtractJwt } from 'passport-jwt'
+import LocalStrategy from 'passport-local'
+import User from '../models/userModel'
 
 
 // JWT Strategy
@@ -11,11 +11,10 @@ passport.use(new JwtStrategy.Strategy({
 }, async (payload, done) => {
   try {
     const user = await User.findById(payload.sub);
-    if (!user)
-      return done(null, false);
-    done(null, user);
+    if (!user) return done(null, false)
+    done(null, user)
   } catch (error) {
-    done(error, false);
+    done(error, false)
   }
 }));
 
@@ -26,16 +25,15 @@ passport.use(new LocalStrategy.Strategy({
 }, async (email, password, done) => {
   try {
     const user = await User.findOne({ email });
-    if (!user)
-      return done(null, false);
+    if (!user) return done(null, false)
     if (await user.isValidPassword(password))
-      return done(null, user);
+      return done(null, user)
     else
-      done(null, false);
+      done(null, false)
   } catch (error) {
-    done(error, false);
+    done(error, false)
   }
 }));
 
 
-export default passport;
+export default passport

@@ -1,10 +1,4 @@
-import { 
-  list, 
-  retrieve, 
-  create, 
-  update, 
-  remove 
-} from '../controllers/accountController'
+import { list, retrieve, create, update, remove } from '../controllers/accountController'
 import PromiseRouter from 'express-promise-router'
 import passport from '../config/passport'
 import { validateParam, validateBody } from '../validations'
