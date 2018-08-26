@@ -1,12 +1,8 @@
-import { 
-  regsiter, 
-  login, 
-  remove 
-} from '../controllers/userController'
 import express from 'express'
 import passport from '../config/passport'
 import { validateBody } from '../validations'
 import { schemas } from '../validations/userValidation'
+import { regsiter, login, remove } from '../controllers/userController'
 
 
 const passportSignIn = passport.authenticate('local', { session: false })

@@ -1,8 +1,8 @@
-import { list, retrieve, create, update, remove, checkPermission } from '../controllers/groupController'
 import express from 'express'
 import passport from '../config/passport'
 import { validateParam, validateBody } from '../validations'
 import { schemas } from '../validations/groupValidation'
+import { list, retrieve, create, update, remove, checkPermission } from '../controllers/groupController'
 
 
 const authenticate = passport.authenticate('jwt', { session: false })
