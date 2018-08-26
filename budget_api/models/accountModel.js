@@ -38,12 +38,16 @@ const accountSchema = new Schema({
   budgetID: {
     type: String,
     required: true
+  },
+  userID: {
+    type: String,
+    required: true
   }
 }, options)
 
 
-accountSchema.post('findOneAndRemove', async account => { 
-  await Budget.findByIdAndUpdate(account.budgetID, { $pull: { accountIDs: account.budgetID } }) 
+accountSchema.post('remove', async account => { 
+  await Budget.findByIdAndUpdate(account.budgetID, { $pull: { accountIDs: account.id } }) 
 })
 
 

@@ -1,11 +1,11 @@
 import express from 'express'
 import morgan from 'morgan'
 import mongoose from 'mongoose'
-import bodyParser from 'body-parser'
 import helmet from 'helmet'
 import userRoutes from './routes/userRoutes'
 import budgetRoutes from './routes/budgetRoutes'
 import accountRoutes from './routes/accountRoutes'
+import groupRoutes from './routes/groupRoutes'
 
 
 const app = express()
@@ -25,12 +25,13 @@ app.use((req, res, next) => {
 // Middlewares
 app.use(helmet())
 app.use(morgan('dev'))
-app.use(bodyParser.json({limit: '1000mb'}))
+app.use(express.json({limit: '1000mb'}))
 
 // Routes
 app.use('/auth', userRoutes)
 app.use('/budgets', budgetRoutes)
 app.use('/accounts', accountRoutes)
+app.use('/groups', groupRoutes)
 
 // Catch 404 Errors
 app.use((req, res, next) => {

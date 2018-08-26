@@ -11,13 +11,13 @@ export async function checkPermission(req, res, next) {
 
 export async function list(req, res, next) {
   const budgets = await Budget.find({}, null, { sort: { startDate: 1 } })
-  res.status(200).json([...budgets])
+  res.status(200).json(budgets)
 }
 
 export async function create(req, res, next) {
   const { user } = req
   const { name, startDate } = req.value.body
-  const duplicateName = await Budget.findOne({ name })
+  const duplicateName = await Budget.findOne({ name, userID: user.id })
   if (duplicateName) return res.status(403).json({ error: `Budget already exists with name: ${name}` })
   const budget = await Budget.create([{name, startDate, userID: user.id}], {lean:true})
   res.status(201).json(budget[0])

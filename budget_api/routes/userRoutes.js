@@ -3,15 +3,16 @@ import {
   login, 
   remove 
 } from '../controllers/userController'
-import PromiseRouter from 'express-promise-router'
+import express from 'express'
 import passport from '../config/passport'
 import { validateBody } from '../validations'
 import { schemas } from '../validations/userValidation'
 
 
-const router = PromiseRouter()
 const passportSignIn = passport.authenticate('local', { session: false })
 const passportJWT = passport.authenticate('jwt', { session: false })
+
+const router = express.Router()
 
 router.route('/register')
   .post(

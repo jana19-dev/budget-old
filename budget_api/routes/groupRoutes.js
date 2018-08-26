@@ -1,8 +1,8 @@
-import { list, retrieve, create, update, remove, checkPermission } from '../controllers/budgetController'
+import { list, retrieve, create, update, remove, checkPermission } from '../controllers/groupController'
 import express from 'express'
 import passport from '../config/passport'
 import { validateParam, validateBody } from '../validations'
-import { schemas } from '../validations/budgetValidation'
+import { schemas } from '../validations/groupValidation'
 
 
 const authenticate = passport.authenticate('jwt', { session: false })
@@ -15,7 +15,7 @@ router.route('/')
     list
   )
   .post(
-    validateBody(schemas.budgetCreateSchema),
+    validateBody(schemas.groupCreateSchema),
     create
   )
 
@@ -28,7 +28,7 @@ router.route('/:id')
     retrieve
   )
   .patch(
-    validateBody(schemas.budgetUpdateSchema),
+    validateBody(schemas.groupUpdateSchema),
     update
   )
   .delete(
