@@ -35,9 +35,9 @@ export async function update(req, res, next) {
   const {categoryIDs} = req.value.body
   if (categoryIDs) // Re-ordering categories
     if (res.locals.group.categoryIDs.length!==categoryIDs.length)
-      return res.status(422).json({ error: 'Group categoryIDs must contain all existing categoryIDs. Only the ordering can be changed.' })
+      return res.status(422).json({ error: 'Group categoryIDs must contain all existing categoryIDs. Only the order can be changed.' })
     else if (!res.locals.group.categoryIDs.every(e => categoryIDs.includes(e)))
-      return res.status(422).json({ error: 'Group categoryIDs must contain all existing categoryIDs. Only the ordering can be changed.' })
+      return res.status(422).json({ error: 'Group categoryIDs must contain all existing categoryIDs. Only the order can be changed.' })
   await res.locals.group.update(req.value.body)
   return res.status(200).json({...res.locals.group._doc, ...req.value.body})
 }

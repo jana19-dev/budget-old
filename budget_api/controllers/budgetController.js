@@ -31,14 +31,14 @@ export async function update(req, res, next) {
   const {accountIDs, groupIDs} = req.value.body
   if (accountIDs) // Re-ordering accounts
     if (res.locals.budget.accountIDs.length!==accountIDs.length)
-      return res.status(422).json({ error: 'Budget accountIDs must contain all existing accountIDs. Only the ordering can be changed.' })
+      return res.status(422).json({ error: 'Budget accountIDs must contain all existing accountIDs. Only the order can be changed.' })
     else if (!res.locals.budget.accountIDs.every(e => accountIDs.includes(e)))
-      return res.status(422).json({ error: 'Budget accountIDs must contain all existing accountIDs. Only the ordering can be changed.' })
+      return res.status(422).json({ error: 'Budget accountIDs must contain all existing accountIDs. Only the order can be changed.' })
   if (groupIDs) // Re-ordering groups
     if (res.locals.budget.groupIDs.length!==groupIDs.length)
-      return res.status(422).json({ error: 'Budget groupIDs must contain all existing groupIDs. Only the ordering can be changed.' })
+      return res.status(422).json({ error: 'Budget groupIDs must contain all existing groupIDs. Only the order can be changed.' })
     else if (!res.locals.budget.groupIDs.every(e => groupIDs.includes(e)))
-      return res.status(422).json({ error: 'Budget groupIDs must contain all existing groupIDs. Only the ordering can be changed.' })
+      return res.status(422).json({ error: 'Budget groupIDs must contain all existing groupIDs. Only the order can be changed.' })
   await res.locals.budget.update(req.value.body)
   return res.status(200).json({...res.locals.budget._doc, ...req.value.body})
 }

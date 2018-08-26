@@ -2,10 +2,10 @@ import Joi from 'joi'
 
 
 export const schemas = {
-  idSchema: Joi.object().keys({
+  idSchema: Joi.object({
     param: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
   }),
-  accountCreateSchema: Joi.object().keys({
+  accountCreateSchema: Joi.object({
     name: Joi.string().required(),
     description: Joi.string(),
     type: Joi.string().valid(["checking", "savings", "credit", "loan", "mortgage", "investment", "cash", "other"]),
@@ -15,7 +15,7 @@ export const schemas = {
     plaidAccount: Joi.object(),
     budgetID: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
   }),
-  accountUpdateSchema: Joi.object().keys({
+  accountUpdateSchema: Joi.object({
     name: Joi.string(),
     description: Joi.string(),
     type: Joi.string().valid(["checking", "savings", "credit", "loan", "mortgage", "investment", "cash", "other"]),

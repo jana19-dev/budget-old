@@ -2,15 +2,15 @@ import Joi from 'joi'
 
 
 export const schemas = {
-  idSchema: Joi.object().keys({
+  idSchema: Joi.object({
     param: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
   }),
-  userRegisterSchema: Joi.object().keys({
+  userRegisterSchema: Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
     passwordConfirmation: Joi.string().required()
   }),
-  userLoginSchema: Joi.object().keys({
+  userLoginSchema: Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required()
   })

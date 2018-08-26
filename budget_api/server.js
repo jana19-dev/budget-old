@@ -6,6 +6,7 @@ import userRoutes from './routes/userRoutes'
 import budgetRoutes from './routes/budgetRoutes'
 import accountRoutes from './routes/accountRoutes'
 import groupRoutes from './routes/groupRoutes'
+import categoryRoutes from './routes/categoryRoutes'
 
 
 const app = express()
@@ -36,6 +37,7 @@ app.use('/auth', userRoutes)
 app.use('/budgets', budgetRoutes)
 app.use('/accounts', accountRoutes)
 app.use('/groups', groupRoutes)
+app.use('/categories', categoryRoutes)
 
 // Catch 404 Errors
 app.use((req, res, next) => {

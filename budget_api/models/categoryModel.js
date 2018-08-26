@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
+import Group from './groupModel'
 
 
 const options = {
@@ -10,14 +11,27 @@ const categorySchema = new Schema({
     type: String,
     required: true
   },
-  budget: {
-    type: Object  // {date: 2018-05-01, amount: 1264.45}
-  },
+  budgeted: [
+    {type: Object}  // [ {date: 2018-05-01, amount: 1264.45} ]
+  ],
   visible: {
     type: Boolean,
     default: true
+  },
+  groupID: {
+    type: String,
+    required: true
+  },
+  userID: {
+    type: String,
+    required: true
   }
 }, options)
+
+
+categorySchema.post('remove', async category => { 
+  await Group.findByIdAndUpdate(category.groupID, { $pull: { categoryIDs: category.id } }) 
+})
 
 
 export default mongoose.model('category', categorySchema)
