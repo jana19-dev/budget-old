@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Joi from 'joi'
 
 
 export function validateParam(schema, name) {
@@ -13,7 +13,7 @@ export function validateParam(schema, name) {
       req.value.params[name] = result.value.param
       next()
     }
-  };
+  }
 }
 export function validateBody(schema) {
   return (req, res, next) => {
@@ -27,5 +27,5 @@ export function validateBody(schema) {
       req.value.body = result.value
       next()
     }
-  };
+  }
 }

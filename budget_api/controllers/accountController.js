@@ -18,7 +18,7 @@ export async function create(req, res, next) {
   const duplicateName = await Account.findOne({ name })
   if (duplicateName) return res.status(403).json({ error: `Account already exists with name: ${name}` })
   const budget = await Budget.findById(budgetID)
-  if (!budget) return res.status(404).json({ error: `Budget with id ${budgetID} was not found` })
+  if (!budget) return res.status(404).json({ error: `Associated budget with id ${budgetID} was not found` })
   const account = await Account.create([req.value.body], {lean:true})
   await budget.update({ $push: { accountIDs: account[0].id } })
   res.status(201).json(account[0])

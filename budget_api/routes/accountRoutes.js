@@ -5,9 +5,9 @@ import { validateParam, validateBody } from '../validations'
 import { schemas } from '../validations/accountValidation'
 
 
-const router = PromiseRouter();
+const router = PromiseRouter()
 const authenticate = passport.authenticate('jwt', { session: false })
-router.use(authenticate);
+router.use(authenticate)
 
 router.route('/')
   .get(

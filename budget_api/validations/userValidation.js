@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Joi from 'joi'
 
 
 export const schemas = {
@@ -14,4 +14,4 @@ export const schemas = {
     email: Joi.string().email().required(),
     password: Joi.string().required()
   })
-};
+}

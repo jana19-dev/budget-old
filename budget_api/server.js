@@ -12,10 +12,10 @@ const app = express()
 
 // MongoDB
 mongoose.connect(process.env.MONGO_DB, { useNewUrlParser: true })
-mongoose.set('debug', true);
+mongoose.set('debug', true)
 
 // Enable CORS
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")

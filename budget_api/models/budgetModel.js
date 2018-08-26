@@ -36,14 +36,14 @@ const budgetSchema = new Schema({
 
 budgetSchema.post('save', async budget => {
   await User.findByIdAndUpdate(budget.userID, { $push: { budgetIDs: budget.id } })
-});
+})
 
 budgetSchema.post('remove', async budget => {
   await Account.remove({budgetID: budget.id})
   await Group.remove({budgetID: budget.id})
   await Payee.remove({budgetID: budget.id})
   await User.findByIdAndUpdate(budget.userID, { $pull: { budgetIDs: budget.id } })
-});
+})
 
 
 export default mongoose.model('budget', budgetSchema)

@@ -38,16 +38,13 @@ const accountSchema = new Schema({
   budgetID: {
     type: String,
     required: true
-  },
-  transactionIDs: [
-    { type: String }
-  ]
+  }
 }, options)
 
 
 accountSchema.post('findOneAndRemove', async account => { 
   await Budget.findByIdAndUpdate(account.budgetID, { $pull: { accountIDs: account.budgetID } }) 
-});
+})
 
 
 export default mongoose.model('account', accountSchema)
