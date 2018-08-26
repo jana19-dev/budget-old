@@ -4,7 +4,7 @@ import { schemas } from '../validations/budgetValidation'
 import { list, retrieve, create, update, remove, checkPermission } from '../controllers/budgetController'
 
 
-const router = express.Router()
+const router = require('express-promise-router')()
 
 router.route('/')
   .get(
