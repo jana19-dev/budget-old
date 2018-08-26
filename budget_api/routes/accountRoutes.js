@@ -6,37 +6,30 @@ import { schemas } from '../validations/accountValidation'
 
 
 const router = PromiseRouter();
-const passportJWT = passport.authenticate('jwt', { session: false })
+const authenticate = passport.authenticate('jwt', { session: false })
+router.use(authenticate);
 
 router.route('/')
   .get(
     list
   )
-
-router.route('/:id')
-.get(
-  validateParam(schemas.idSchema, 'id'),
-  retrieve
-)
-
-router.route('/')
   .post(
     validateBody(schemas.accountCreateSchema),
-    passportJWT,
     create
   )
 
 router.route('/:id')
+  .all(
+    validateParam(schemas.idSchema, 'id'),
+  )
+  .get(
+    retrieve
+  )
   .patch(
     validateBody(schemas.accountUpdateSchema),
-    passportJWT,
     update
   )
-
-router.route('/:id')
   .delete(
-    validateParam(schemas.idSchema, 'id'),
-    passportJWT,
     remove
   )
 

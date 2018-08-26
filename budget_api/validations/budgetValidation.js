@@ -12,7 +12,6 @@ export const schemas = {
   budgetUpdateSchema: Joi.object().keys({
     name: Joi.string(),
     startDate: Joi.date().iso(),
-    payeeIDs: Joi.array().items(Joi.string().regex(/^[0-9a-fA-F]{24}$/)).unique(),
     accountIDs: Joi.array().items(Joi.string().regex(/^[0-9a-fA-F]{24}$/)).unique(),
     groupIDs: Joi.array().items(Joi.string().regex(/^[0-9a-fA-F]{24}$/)).unique()
   }),

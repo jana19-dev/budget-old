@@ -1,4 +1,4 @@
-import { list, retrieve, create, update, remove } from '../controllers/budgetController'
+import { list, retrieve, create, update, remove, checkPermission } from '../controllers/budgetController'
 import PromiseRouter from 'express-promise-router'
 import passport from '../config/passport'
 import { validateParam, validateBody } from '../validations'
@@ -6,37 +6,31 @@ import { schemas } from '../validations/budgetValidation'
 
 
 const router = PromiseRouter();
-const passportJWT = passport.authenticate('jwt', { session: false })
+const authenticate = passport.authenticate('jwt', { session: false })
+router.use(authenticate);
 
 router.route('/')
   .get(
     list
   )
-
-router.route('/:id')
-.get(
-  validateParam(schemas.idSchema, 'id'),
-  retrieve
-)
-
-router.route('/')
   .post(
-    passportJWT,
     validateBody(schemas.budgetCreateSchema),
     create
   )
 
 router.route('/:id')
+  .all(
+    validateParam(schemas.idSchema, 'id'),
+    checkPermission
+  )
+  .get(
+    retrieve
+  )
   .patch(
-    passportJWT,
     validateBody(schemas.budgetUpdateSchema),
     update
   )
-
-router.route('/:id')
   .delete(
-    passportJWT,
-    validateParam(schemas.idSchema, 'id'),
     remove
   )
 

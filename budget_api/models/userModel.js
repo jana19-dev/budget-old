@@ -18,17 +18,17 @@ const userSchema = new Schema({
   ]
 })
 
-userSchema.pre('save', async (next) => {
+userSchema.pre('save', async function(next){
   try {
-    const salt = await bcrypt.genSalt(10)
-    this.password = await bcrypt.hash(this.password, salt)
+    const salt = await bcrypt.genSalt(10)  
+    this.password = await bcrypt.hash(this.password, salt)   
     next()
   } catch (error) {
     next(error)
   }
 })
 
-userSchema.methods.isValidPassword = async (loginPassword) => {
+userSchema.methods.isValidPassword = async function(loginPassword){
   try {
     return await bcrypt.compare(loginPassword, this.password)
   } catch (error) {
