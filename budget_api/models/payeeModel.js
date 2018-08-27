@@ -10,18 +10,27 @@ const payeeSchema = new Schema({
     type: String,
     required: true
   },
-  autoCategoryID: {
+  defaultCategoryID: {
     type: String,
     default: ""
   },
-  autoTransactionType: {
+  defaultTransactionType: {
     type: String,
     default: "outflow"
   },
   googlePlace: {
     type: Object
+  },
+  budgetID: {
+    type: String,
+    required: true
+  },
+  userID: {
+    type: String,
+    required: true
   }
 }, options)
+
 
 
 export default mongoose.model('payee', payeeSchema)

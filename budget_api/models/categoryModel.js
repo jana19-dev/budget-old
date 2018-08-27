@@ -1,5 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 import Group from './groupModel'
+import Payee from './payeeModel'
 
 
 const options = {
@@ -31,6 +32,7 @@ const categorySchema = new Schema({
 
 categorySchema.post('remove', async category => { 
   await Group.findByIdAndUpdate(category.groupID, { $pull: { categoryIDs: category.id } }) 
+  await Payee.findOneAndUpdate({defaultCategoryID: category.id}, {defaultCategoryID: ""})
 })
 
 

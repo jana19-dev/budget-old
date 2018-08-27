@@ -18,9 +18,6 @@ const budgetSchema = new Schema({
     required: true,
     default: Date.now
   },
-  payeeIDs: [
-    { type: String }
-  ],
   accountIDs: [
     { type: String }
   ],
