@@ -11,21 +11,9 @@ const transactionSchema = new Schema({
     required: true,
     default: Date.now
   },
-  payeeID: {
-    type: String,
-    required: true
-  },
-  accountID: {
-    type: String,
-    required: true
-  },
-  categoryID: {
-    type: String,
-    required: true
-  },
   recurring: {
-    type: mixed,
-    default: {frequency: "once", untilDate: null, noOfPayments: 1}
+    type: Object,
+    default: {frequency: "once", startDate: "", untilDate: "", noOfPayments: 1}
   },
   inflow: {
     type: Number,
@@ -52,7 +40,27 @@ const transactionSchema = new Schema({
     default: ""
   },
   plaidTransaction: {
-    ype: Object
+    type: Object
+  },
+  payeeID: {
+    type: String,
+    default: ""
+  },
+  accountID: {
+    type: String,
+    default: ""
+  },
+  categoryID: {
+    type: String,
+    default: ""
+  },
+  budgetID: {
+    type: String,
+    required: true
+  },
+  userID: {
+    type: String,
+    required: true
   }
 }, options)
 

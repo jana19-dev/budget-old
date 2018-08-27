@@ -12,7 +12,7 @@ export async function checkPermission(req, res, next) {
 }
 
 export async function list(req, res, next) {
-  const payees = await Payee.find({})
+  const payees = await Payee.find({userID: req.user.id})
   res.status(200).json(payees)
 }
 

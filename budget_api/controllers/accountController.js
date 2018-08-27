@@ -11,7 +11,7 @@ export async function checkPermission(req, res, next) {
 }
 
 export async function list(req, res, next) {
-  const accounts = await Account.find({}, null, { sort: { startDate: 1 } })
+  const accounts = await Account.find({userID: req.user.id})
   res.status(200).json(accounts)
 }
 

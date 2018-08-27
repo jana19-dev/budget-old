@@ -8,6 +8,7 @@ import accountRoutes from './routes/accountRoutes'
 import groupRoutes from './routes/groupRoutes'
 import categoryRoutes from './routes/categoryRoutes'
 import payeeRoutes from './routes/payeeRoutes'
+import transactionRoutes from './routes/transactionRoutes'
 
 
 const app = express()
@@ -40,6 +41,7 @@ app.use('/accounts', accountRoutes)
 app.use('/groups', groupRoutes)
 app.use('/categories', categoryRoutes)
 app.use('/payees', payeeRoutes)
+app.use('/transactions', transactionRoutes)
 
 // Catch 404 Errors
 app.use((req, res, next) => {

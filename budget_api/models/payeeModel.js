@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
+import Transaction from './transactionModel'
 
 
 const options = {
@@ -32,5 +33,8 @@ const payeeSchema = new Schema({
 }, options)
 
 
+payeeSchema.post('remove', async payee => { 
+  await Transaction.updateMany({payeeID: payee.id}, {payeeID: ""})
+})
 
 export default mongoose.model('payee', payeeSchema)

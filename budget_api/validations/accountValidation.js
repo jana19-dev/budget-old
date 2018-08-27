@@ -5,8 +5,9 @@ export const schemas = {
   idSchema: Joi.object({
     param: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
   }),
+
   accountCreateSchema: Joi.object({
-    name: Joi.string().required(),
+    name: Joi.string().required().invalid('unknown'),
     description: Joi.string(),
     type: Joi.string().valid(["checking", "savings", "credit", "loan", "mortgage", "investment", "cash", "other"]),
     startDate: Joi.date().iso().required(),
@@ -15,8 +16,9 @@ export const schemas = {
     plaidAccount: Joi.object(),
     budgetID: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
   }),
+  
   accountUpdateSchema: Joi.object({
-    name: Joi.string(),
+    name: Joi.string().invalid('unknown'),
     description: Joi.string(),
     type: Joi.string().valid(["checking", "savings", "credit", "loan", "mortgage", "investment", "cash", "other"]),
     startDate: Joi.date().iso(),

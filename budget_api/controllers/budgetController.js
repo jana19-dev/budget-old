@@ -10,7 +10,7 @@ export async function checkPermission(req, res, next) {
 }
 
 export async function list(req, res, next) {
-  const budgets = await Budget.find({}, null, { sort: { startDate: 1 } })
+  const budgets = await Budget.find({userID: req.user.id}, null, { sort: { startDate: 1 } })
   res.status(200).json(budgets)
 }
 

@@ -1,5 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 import Budget from './budgetModel'
+import Category from './categoryModel'
 
 
 const options = {
@@ -31,6 +32,11 @@ const groupSchema = new Schema({
 
 groupSchema.post('remove', async group => { 
   await Budget.findByIdAndUpdate(group.budgetID, { $pull: { groupIDs: group.id } }) 
+  let categoryIDs = await Category.find({groupID: group.id}, '_id')
+  categoryIDs = categoryIDs.map(item=>item._id)
+  await Payee.updateMany({defaultCategoryID: {$in: categoryIDs}}, {defaultCategoryID: ""})
+  await Transaction.updateMany({categoryID: {$in: categoryIDs}}, {categoryID: ""})
+  await Category.remove({groupID: group.id})
 })
 
 

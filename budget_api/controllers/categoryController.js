@@ -1,5 +1,6 @@
 import Category from '../models/categoryModel'
 import Group from '../models/groupModel'
+import Budget from '../models/budgetModel'
 
 
 export async function checkPermission(req, res, next) {
@@ -11,17 +12,19 @@ export async function checkPermission(req, res, next) {
 }
 
 export async function list(req, res, next) {
-  const categorys = await Category.find({})
-  res.status(200).json(categorys)
+  const categories = await Category.find({userID: req.user.id})
+  res.status(200).json(categories)
 }
 
 export async function create(req, res, next) {
   const { user } = req
-  const { name, groupID } = req.value.body
+  const { name, budgetID, groupID } = req.value.body
+  const budget = await Budget.findById(budgetID)
+  if (!budget) return res.status(404).json({ error: `Associated budget with id ${budgetID} was not found` })
   const group = await Group.findById(groupID)
   if (!group) return res.status(404).json({ error: `Associated group with id ${groupID} was not found` })
   const duplicateName = await Category.findOne({ name, groupID })
-  if (duplicateName) return res.status(403).json({ error: `Category already exists with name: ${name} in group ${groupID}` })
+  if (duplicateName) return res.status(422).json({ error: `Category already exists with name: ${name} in group ${groupID}` })
   const category = await Category.create([{...req.value.body, userID: user.id}], {lean:true})
   await group.update({ $push: { categoryIDs: category[0].id } })
   res.status(201).json(category[0])

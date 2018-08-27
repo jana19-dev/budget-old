@@ -5,10 +5,12 @@ export const schemas = {
   idSchema: Joi.object({
     param: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required().error(new Error('ID should be a valid ObjectID.'))
   }),
+
   budgetCreateSchema: Joi.object({
     name: Joi.string().required(),
     startDate: Joi.date().iso().required(),
   }),
+  
   budgetUpdateSchema: Joi.object({
     name: Joi.string(),
     startDate: Joi.date().iso(),

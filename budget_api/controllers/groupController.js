@@ -11,18 +11,17 @@ export async function checkPermission(req, res, next) {
 }
 
 export async function list(req, res, next) {
-  const groups = await Group.find({})
+  const groups = await Group.find({userID: req.user.id}) 
   res.status(200).json(groups)
 }
 
 export async function create(req, res, next) {
-  const { user } = req
   const { name, budgetID } = req.value.body
   const budget = await Budget.findById(budgetID)
   if (!budget) return res.status(404).json({ error: `Associated budget with id ${budgetID} was not found` })
   const duplicateName = await Group.findOne({ name, budgetID })
   if (duplicateName) return res.status(403).json({ error: `Group already exists with name: ${name} in budget ${budgetID}` })
-  const group = await Group.create([{...req.value.body, userID: user.id}], {lean:true})
+  const group = await Group.create([{...req.value.body, userID: req.user.id}], {lean:true})
   await budget.update({ $push: { groupIDs: group[0].id } })
   res.status(201).json(group[0])
 }

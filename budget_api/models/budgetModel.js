@@ -2,7 +2,9 @@ import mongoose, { Schema } from 'mongoose'
 import User from './userModel'
 import Account from './accountModel'
 import Group from './groupModel'
+import Category from './categoryModel'
 import Payee from './payeeModel'
+import Transaction from './transactionModel'
 
 const options = {
   timestamps: true
@@ -37,8 +39,10 @@ budgetSchema.post('save', async budget => {
 
 budgetSchema.post('remove', async budget => {
   await Account.remove({budgetID: budget.id})
+  await Category.remove({budgetID: budget.id})
   await Group.remove({budgetID: budget.id})
   await Payee.remove({budgetID: budget.id})
+  await Transaction.remove({budgetID: budget.id})
   await User.findByIdAndUpdate(budget.userID, { $pull: { budgetIDs: budget.id } })
 })
 
