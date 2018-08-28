@@ -2,11 +2,11 @@ import Joi from 'joi'
 
 
 export const schemas = {
-  idSchema: Joi.object().keys({
+  idSchema: Joi.object({
     param: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
   }),
 
-  transactionCreateSchema: Joi.object().keys({
+  transactionCreateSchema: Joi.object({
     date: Joi.date().iso().required(),
     recurring: Joi.object({
       frequency: Joi.string().valid(['once', 'monthly', 'weekly', 'bi-weekly', 'month-end', 'bi-monthly', 'quaterly', 'semi-anually', 'anually']),
@@ -27,7 +27,7 @@ export const schemas = {
     budgetID: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
   }).xor('inflow', 'outflow'),
 
-  transactionUpdateSchema: Joi.object().keys({
+  transactionUpdateSchema: Joi.object({
     date: Joi.date().iso(),
     recurring: Joi.object({
       frequency: Joi.string().valid(['once', 'monthly', 'weekly', 'bi-weekly', 'month-end', 'bi-monthly', 'quaterly', 'semi-anually', 'anually']),
