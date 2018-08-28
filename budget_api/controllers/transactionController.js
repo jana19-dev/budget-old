@@ -40,11 +40,11 @@ export async function retrieve(req, res, next) {
 export async function update(req, res, next) {
   const { accountID, payeeID, categoryID } = req.value.body
   if (accountID) {
-    const account = await Category.findById(accountID)
+    const account = await Account.findById(accountID)
     if (!account) return res.status(404).json({ error: `Associated account with id ${accountID} was not found` })
   }
   if (payeeID) {
-    const payee = await Category.findById(payeeID)
+    const payee = await Payee.findById(payeeID)
     if (!payee) return res.status(404).json({ error: `Associated payee with id ${payeeID} was not found` })
   }
   if (categoryID) {

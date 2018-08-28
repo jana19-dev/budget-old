@@ -1,6 +1,8 @@
 import mongoose, { Schema } from 'mongoose'
 import Budget from './budgetModel'
 import Category from './categoryModel'
+import Payee from './payeeModel'
+import Transaction from './transactionModel'
 
 
 const options = {
